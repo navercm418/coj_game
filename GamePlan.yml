@@ -1,0 +1,156 @@
+---
+game:
+  title_short: "COJ"
+  title_long: "Chronicles Of Judah"
+  sub_title: "Solomon's Temple"
+  type:
+    - "Adevture"
+    - "Role Playing"
+    - "Simulation"
+  aditional_game_elements:
+    - "Strategy"
+    - "City Building"
+    - "Crafting"
+    - "Survival"
+    - "Economy"
+    - "Story"
+    - "Open World"
+    - "Vehicle Simulation"
+    - "Farming"
+    - "Trading"
+  work_started: 2020-9-21
+
+world:
+  name: "Earth"
+  description: "A unique planet created by Jehovah as a dwelling place for Man and animals."
+  places:    
+    - Jerusalem:
+      - id: "02_Jerusalem"
+      - order: 1
+      - location: "south central"
+      - description: "Center of pure worship and home of the king of Judah."
+      - climate: "Temperate"
+      - density: "High"    
+    - ex1:
+      - id: "03_ex1"
+      - order: 2
+      - location: "Central"
+      - description: "Metropolitan capital of Gandaria."
+      - climate: "Temperate/Mixed"
+      - density: "Very High"
+    - ex2:
+      - id: "04_ex2"
+      - order: 3
+      - location: "West"
+      - description: "Western desert region of Gandaria.  Home to mainly industry."
+      - climate: "Desert"
+      - density: "Low"
+    - ex3:
+      - id: "05_ex3"
+      - order: 4
+      - location: "East"
+      - description: "Heartland of Gandaria.  Home to farmers and agriculture."
+      - climate: "Temperate"
+      - density: "Medium"
+    - ex4:
+      - id: "06_ex4"
+      - order: 5
+      - location: "North"
+      - description: "Northern Arctic region of Gandaria.  Home to mining and daring adventurers."
+      - climate: "Arctic"
+      - density: "Very Low"
+
+economy:
+  - logic:
+  - trade_goods:
+    - wood:
+      - description: "used for crafting"
+
+calendar:
+  - image:
+    - mth: "   Panas  -->  Gugur  -->  Dingin  -->  Semi   "
+    - hdr: " Senin | Selasa | Rabu | Kamis | Jumat | Sabtu "
+    - hl1: "-----------------------------------------------"
+    - wk1: "   1   |    2   |   3  |   4   |   5   |   6   "
+    - hl2: "-----------------------------------------------"
+    - wk2: "   7   |    8   |   9  |   10  |   11  |   12  "
+    - hl3: "-----------------------------------------------"
+    - wk3: "   13  |    14  |   15 |   16  |   17  |   18  "
+    - hl4: "-----------------------------------------------"
+    - wk4: "   19  |    20  |   21 |   22  |   23  |   24  "
+    - hl5: "-----------------------------------------------"
+    - wk5: "   25  |    26  |   27 |   28  |   29  |   30  "
+  - start:
+    - year: 2520
+    - month: "Panas"
+    - day_of_week: "Kamis"
+    - day_of_month: 16
+    - short_date: 2520-1-16
+  - month:
+    - Panas:
+      - alt: "summer"
+      - order: 1
+      - tempurature: "hot"
+      - rain: "moderate"
+      - wind: "low"
+    - Gugur:
+      - alt: "autumn"
+      - order: 2
+      - tempurature: "cool"
+      - rain: "low"
+      - wind: "moderate"
+    - Dingin:
+      - alt: "winter"
+      - order: 3
+      - tempurature: "cold"
+      - rain: "moderate"
+      - wind: "moderate"
+    - Semi:
+      - alt: "spring"
+      - order: 4
+      - tempurature: "cool"
+      - rain: "high"
+      - wind: "high"
+  - days:
+    - Senin:
+      - alt: "monday"
+      - order: 1
+    - Selasa:
+      - alt: "tuesday"
+      - order: 2
+    - Rabu:
+      - alt: "wednesday"
+      - order: 3
+    - Kamis:
+      - alt: "thursday"
+      - order: 4
+    - Jumat:
+      - alt: "friday"
+      - order: 5
+    - Sabtu:
+      - alt: "saturday"
+      - order: 6
+
+mechanics:
+  game_object:
+    - scene_1st_load:
+      - 'one GameObject in every scene.'
+      - '1st.. run scene_init.py.'
+      - 'loop through objects set random properties'
+      - 'assign ID'
+      - 'save to db.'
+    - scene_reload:
+      - 'GOb loop through and calculate'
+      - 'add - modify - delete based on calc'
+      - '  update npc persoality toward player'
+    - updates:
+      - 'events trigger updates'
+      - 'each object saves self to db'
+      - 'use message to "speak" with other objects'
+      - '  example: buy item at store, button on ui updates player inventory and store inventory.'
+
+story_outline:
+  main_characters:
+    - player: "Main Character (player named).  Starts the game at the age of 20 ready to begin a new life."
+  intro: "The game begins with news of Solomon starting work on the Temple of Jehovah.  He calls for all able bodied men to share
+    in the work, helping any way they can.."
