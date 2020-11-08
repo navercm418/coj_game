@@ -1,33 +1,38 @@
 import bge
+import bpy
 import sqlite3
 import os
 import sys
 
-# setting up database heli_data.db
-zvDelim = ""
-zvDbPath = ""
+# set object variables
+cont = bge.logic.getCurrentController()
+own = cont.owner
+cur_scn = bpy.context.scene.name
 
-zvRootDir = sys.argv[0]
-if os.name == 'nt':
-    zvRootDir = zvRootDir.rsplit("\\", 1)[0]
-    zvDelim = "\\"
-else:
-    zvRootDir = zvRootDir.rsplit('/', 1)[0]
-    zvDelim = "/"
+# =================================================================
+# setting up database coj_data.db
+root = os.path.abspath(os.curdir)
+zvDbFile = os.path.join(root, "db", "coj_data.db")
 
-zvDbPath = zvRootDir + zvDelim + "heli_data" + zvDelim + "db"
-os.chdir(zvDbPath)
+own['GO_DbFile']=zvDbFile
 
-zvDbCon = sqlite3.connect('heli_data.db')
+zvDbCon = sqlite3.connect(zvDbFile)
 zvCrs = zvDbCon.cursor()
-zvCrs.execute("UPDATE sys_settings SET sysO1VAL = '"+ zvRootDir +"' WHERE sysO1 = 'root_directory_full'")
-zvCrs.execute("UPDATE sys_settings SET sysO1VAL = '"+ os.name +"' WHERE sysO1 = 'os_type'")
-zvCrs.execute("UPDATE sys_settings SET sysO1VAL = '"+ zvDbPath +"' WHERE sysO1 = 'database_directory'")
-zvCrs.execute("UPDATE sys_settings SET sysO2VAL = 'heli_data.db' WHERE sysO2 = 'database_file'")
+# ===================================================================
+
+zvCrs.execute("""
+SELECT pls.PSSCNFLOAD
+FROM PLSCENES pls
+JOIN PLAYER plr on plr.PLRID=pls.PSPLRID
+WHERE plr.PLRCURPLR='Y' and pls.PSSCNID='"""+ cur_scn +"'")
+result = zvCrs.fetchone()
+zvFload = result[0]
+    
+if zvFload == 'Y':
+    print('this is the 1st load for', cur_scn)
+else:
+    print(cur_scn, 'has loaded before')
+
 
 zvDbCon.commit()
-
-for row in zvCrs.execute('SELECT * FROM sys_settings'):
-    print(row)
-
 zvDbCon.close()
